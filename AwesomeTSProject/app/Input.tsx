@@ -23,6 +23,7 @@ export default function Input({inputValue, inputChange}: InputProps) {
 
 const styles = StyleSheet.create({
   inputContainer: {
+    marginTop: 15,
     marginLeft: 20,
     marginRight: 20,
     shadowOpacity: 0.2,
