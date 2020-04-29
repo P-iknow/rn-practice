@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
-import Heading from './app/Heading';
-import Input from './app/Input';
-import Button from './app/Button';
+import Heading from './components/Heading';
+import Input from './components/Input';
+import Button from './components/Button';
 
 declare const global: {HermesInternal: null | {}};
 
