@@ -1,16 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
+import {todo} from './model';
 import Heading from './components/Heading';
 import Input from './components/Input';
 import Button from './components/Button';
+import TodoList from './components/TodoList';
 
 declare const global: {HermesInternal: null | {}};
-
-type todo = {
-  title: string;
-  todoIndex: number;
-  complete: boolean;
-};
 
 let todoIndex: number = 0;
 
@@ -49,6 +45,7 @@ function App() {
           inputChange={(text: string) => inputChange(text)}
           inputValue={inputValue}
         />
+        <TodoList todos={todos} />
         <Button submitTodo={submitTodo} />
       </ScrollView>
     </View>
