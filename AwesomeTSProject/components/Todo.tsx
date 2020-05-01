@@ -1,15 +1,27 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import TodoButton from './TodoButton';
 import {todo} from '../model';
 
 type todoProps = {
+  key: number;
   todo: todo;
+  onToggle: (todoIndex: number) => void;
+  onDelete: (todoIndex: number) => void;
 };
 
-export default function Todo({todo}: todoProps) {
+export default function Todo({todo, onToggle, onDelete}: todoProps) {
   return (
     <View style={styles.todoContainer}>
       <Text style={styles.todoText}>{todo.title}</Text>
+      <View style={styles.buttons}>
+        <TodoButton
+          name="Done"
+          onPress={() => onToggle(todo.todoIndex)}
+          isComplete={todo.complete}
+        />
+        <TodoButton name="Delete" onPress={() => onDelete(todo.todoIndex)} />
+      </View>
     </View>
   );
 }
@@ -35,5 +47,11 @@ const styles = StyleSheet.create({
   },
   todoText: {
     fontSize: 17,
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 });

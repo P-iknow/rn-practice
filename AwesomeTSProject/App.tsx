@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
-import {todo} from './model';
+import {todos, todoType} from './model';
 import Heading from './components/Heading';
 import Input from './components/Input';
 import Button from './components/Button';
 import TodoList from './components/TodoList';
+import TabBar from './components/TabBar';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -12,8 +13,8 @@ let todoIndex: number = 0;
 
 function App() {
   const [inputValue, setInputValue] = useState<string>('');
-  const [todos, setTodos] = useState<todo[]>([]);
-  const [type, setType] = useState('All');
+  const [todos, setTodos] = useState<todos>([]);
+  const [type, setType] = useState<todoType>('All');
 
   const inputChange = (inputValue: string) => {
     console.log(`input value: ${inputValue}`);
@@ -33,8 +34,24 @@ function App() {
     setTodos([...todos, todo]);
   };
 
+  const onToggle = (todoIndex: number) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.todoIndex === todoIndex) {
+        todo.complete = !todo.complete;
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
+  };
+
+  const onDelete = (todoIndex: number) => {
+    const newTodos = todos.filter((todo) => todo.todoIndex !== todoIndex);
+    setTodos(newTodos);
+  };
+
   useEffect(() => {
-    console.dir(todos);
+    console.log(todos);
   }, [todos]);
 
   return (
@@ -45,9 +62,15 @@ function App() {
           inputChange={(text: string) => inputChange(text)}
           inputValue={inputValue}
         />
-        <TodoList todos={todos} />
+        <TodoList
+          todos={todos}
+          onToggle={onToggle}
+          onDelete={onDelete}
+          type={type}
+        />
         <Button submitTodo={submitTodo} />
       </ScrollView>
+      <TabBar type={type} setType={setType} />
     </View>
   );
 }

@@ -5,3 +5,5 @@ export type todo = {
 };
 
 export type todos = todo[];
+
+export type todoType = 'All' | 'Active' | 'Complete';
