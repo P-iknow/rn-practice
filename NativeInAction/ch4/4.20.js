@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-
-//react-native에서 Image 컴포넌트 가져오기
-import {Image, StyleSheet, View, Text} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
 export default class App extends Component {
   render() {
@@ -9,18 +7,15 @@ export default class App extends Component {
       <View style={styles.container}>
         <View style={styles.cardContainer}>
           <View style={styles.cardImageContainer}>
-            {/*  user.png 파일은 앱의 코드와 같은 디렉토리에 위치함 */}
             <Image style={styles.cardImage} source={require('./user.png')} />
           </View>
           <View>
-            {/* 인물 이름을 보여주는 Text컴포넌트 */}
-            <Text style={styles.cardName}>John Doe</Text>
+            <Text style={styles.cardTitle}>John Doe</Text>
           </View>
-          <View style={styles.cardOcupationContainer}>
-            <Text style={styles.cardOcupation}>React Native Developer</Text>
+          <View style={styles.cardSubtitleContainer}>
+            <Text style={styles.cardSubtitle}>React Native Developer</Text>
           </View>
           <View>
-            {/* 인물의 프로필 설명 */}
             <Text style={styles.cardDescription}>
               John is a really great JavaScript developer. He loves using JS to
               build React Native applications for iOS and Android.
@@ -40,8 +35,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  // 프로필 카드에 border 속성 추가하기
   cardContainer: {
+    alignItems: 'center',
     borderColor: 'black',
     borderWidth: 3,
     borderStyle: 'solid',
@@ -49,41 +44,52 @@ const styles = StyleSheet.create({
     backgroundColor: profileCardColor,
     width: 300,
     height: 400,
-    //justifyContent: 'center',
-    alignItems: 'center',
-    padding: 30,
   },
-  // 이미지 컨테이너(image container)는 120 X 120 크기의 정사각형.
-  // borderRadius 속성을 60(120의 반)으로 지정해서 원으로 나타남
   cardImageContainer: {
+    alignItems: 'center',
     backgroundColor: 'white',
     borderWidth: 3,
     borderColor: 'black',
-    paddingRight: 5,
     width: 120,
     height: 120,
     borderRadius: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 30,
+    paddingTop: 15,
   },
-  //이미지에 적용한 스타일
   cardImage: {
     width: 80,
     height: 80,
   },
-  cardName: {
+  cardTitle: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 27,
+    fontSize: 24,
     marginTop: 30,
+    textShadowColor: 'black', // 음영 색상 지정
+    textShadowOffset: {
+      //음영의 offset 지정 오른쪽 하단으로 음영
+      height: 2,
+      width: 2,
+    },
+    textShadowRadius: 3, //음영의 반경
   },
-  cardOcupationContainer: {
-    borderBottomWidth: 3,
-    paddingTop: 10,
-    paddingBottom: 10,
+  cardSubtitleContainer: {
+    borderColor: 'black',
+    borderWidth: 3,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
+  },
+  cardSubtitle: {
+    fontWeight: 'bold',
+    marginTop: 10,
     marginBottom: 10,
   },
   cardDescription: {
-    fontStyle: 'italic', //설명부분 기울임꼴 적용
+    fontStyle: 'italic',
+    marginTop: 10,
+    marginRight: 40,
+    marginLeft: 40,
+    marginBottom: 10,
   },
 });
